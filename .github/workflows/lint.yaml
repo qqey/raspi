@@ -1,0 +1,29 @@
+name: yamllint
+
+on:
+  pull_request:
+    branches:
+      - "master"
+    types: [opened, synchronize, closed]
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "Create PR comment of reviewdog"
+        uses: reviewdog/action-yamllint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+          yamllint_flags: '-c .yamllint .'
+
+      - name: "lint All The Things in Repository"
+        uses: karancode/yamllint-github-action@v2.0.0
+        with:
+          yamllint_file_or_dir: .
+          yamllint_config_filepath: .yamllint
