@@ -13,9 +13,12 @@ services:
       LDAP_TLS_VERIFY_CLIENT: "never"
     ports:
       - 389:389
+      - 636:636
     volumes:
       - ./data:/var/lib/ldap
       - ./config:/etc/ldap/slapd.d
+    networks:
+      - local
 
   phpldapadmin:
     image: osixia/phpldapadmin
@@ -25,6 +28,9 @@ services:
       - PHPLDAPADMIN_LDAP_HOSTS=openldap
       - PHPLDAPADMIN_HTTPS=false
     ports:
-      - 8080:80
-    depends_on:
-      - openldap
+      - "6443:443"
+    networks:
+      - local
+networks:
+  local:
+    driver: bridge
