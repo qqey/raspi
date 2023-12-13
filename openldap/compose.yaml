@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  openldap:
+    image: osixia/openldap
+    restart: always
+    container_name: openldap
+    environment:
+      LDAP_ORGANISATION: "qqey.net"
+      LDAP_DOMAIN: "qqey.net"
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_READONLY_USER: "true"
+      LDAP_READONLY_USER_USERNAME: "readonly"
+      LDAP_READONLY_USER_PASSWORD: "readonly_password"
+      LDAP_TLS_VERIFY_CLIENT: "never"
+    ports:
+      - 389:389
+    volumes:
+      - ./data:/var/lib/ldap
+      - ./config:/etc/ldap/slapd.d
+
+  phpldapadmin:
+    image: osixia/phpldapadmin
+    container_name: phpldapadmin
+    restart: always
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=openldap
+    ports:
+      - 8080:80
+    depends_on:
+      - openldap
