@@ -5,7 +5,7 @@ services:
     volumes:
       - ./volumes/stalwart-mail:/opt/stalwart-mail
     ports:
-      - "8080:8080"
+      - "8081:8080"
       - "25:25"
       - "587:587"
       - "465:465"
