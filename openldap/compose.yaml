@@ -26,7 +26,6 @@ services:
     restart: always
     environment:
       - PHPLDAPADMIN_LDAP_HOSTS=openldap
-      - PHPLDAPADMIN_HTTPS=false
     ports:
       - "6443:443"
     networks:
