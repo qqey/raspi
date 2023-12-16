@@ -1,6 +1,7 @@
 services:
   nginx:
-    image: nginx:latest
+    build:
+      context: .
     restart: unless-stopped
     ports:
       - 49191:80
