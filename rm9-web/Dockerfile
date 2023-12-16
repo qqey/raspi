@@ -1,7 +1,8 @@
-FROM nginx:latest
+FROM nginx:1.22.1
 
 # GeoIPモジュールの有効化
-RUN apt-get update && apt-get install -y libnginx-mod-http-geoip
+RUN apt-get update && \
+    apt-get install -y libnginx-mod-http-geoip
 
 # GeoIPデータベースのダウンロード（例としてMaxMindのGeoIPデータベースを使用）
 RUN mkdir -p /usr/share/GeoIP && \
