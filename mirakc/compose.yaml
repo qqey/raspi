@@ -5,7 +5,7 @@ services:
     init: true
     restart: unless-stopped
     ports:
-      - 40772:40772
+      - 40778:40772
     volumes:
       - ./config.yml:/etc/mirakc/config.yml:ro
     environment:
