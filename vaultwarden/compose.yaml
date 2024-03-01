@@ -9,4 +9,4 @@ services:
     environment:
       - DOMAIN=https://vault.qqey.net
       - WEBSOCKET_ENABLED=true
-      - ADMIN_TOKEN=eXZkHMd0oHz05KuxT7JkeXZkHMd0oHz05KuxT7Jk
+      - ADMIN_TOKEN=${ADMIN_TOKEN}
