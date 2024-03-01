@@ -4,14 +4,8 @@ services:
     restart: always
     volumes:
       - ./data:/data
-    env_file:
-      - .env
+    ports:
+      - "8838:80"
     environment:
       - DOMAIN=https://vault.qqey.net
       - WEBSOCKET_ENABLED=true
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    user: root
-    restart: always
-    command: tunnel run --token $CLOUDFLARED_TOKEN
