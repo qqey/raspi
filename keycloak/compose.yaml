@@ -2,7 +2,7 @@ services:
   keycloak:
     image: jboss/keycloak
     ports:
-      - 49192:8080
+      - 8841:8080
     environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_USER=${KEYCLOAK_USER}
+      - KEYCLOAK_PASSWORD=${KEYCLOAK_PASSWORD}
