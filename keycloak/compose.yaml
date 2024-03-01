@@ -1,8 +1,15 @@
 services:
   keycloak:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    tty: true
+    stdin_open: true
     ports:
-      - 8841:8080
+      - "8849:8080"
+    volumes:
+      - ./data/keycloak:/opt/keycloak/data
     environment:
-      - KEYCLOAK_USER=${KEYCLOAK_USER}
-      - KEYCLOAK_PASSWORD=${KEYCLOAK_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
+    command:
+      - start-dev
