@@ -1,13 +1,23 @@
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest
-    tty: true
-    stdin_open: true
-    ports:
-        - 8849:8443
+    command: start-dev
     environment:
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      KC_HOSTNAME: localhost
-    command:
-      - start
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+      - KC_DB=mariadb
+      - KC_DB_URL_HOST=db
+      - KC_DB_USERNAME=myuser
+      - KC_DB_PASSWORD=change_me
+      - KC_HOSTNAME=localhost
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: mariadb:10
+    environment:
+      - MARIADB_DATABASE=keycloak
+      - MARIADB_USER=myuser
+      - MARIADB_PASSWORD=change_me
+      - MARIADB_ROOT_PASSWORD=change_me
